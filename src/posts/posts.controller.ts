@@ -14,7 +14,7 @@ export class PostsController {
     @Request() req,
     @Body() createPostDto: CreatePostDto
   ) {
-    return this.postsService.create(createPostDto);
+    return this.postsService.create({authorId: req.user.sub, ...createPostDto});
   }
 
   @Get()
@@ -22,6 +22,8 @@ export class PostsController {
     @Query('pageSize') pageSize?: number,
     @Query('page') page?: number,
   ) {
+    pageSize = pageSize ?? 3
+    page = page ?? 1
     return this.postsService.findAll(+pageSize, +page);
   }
 

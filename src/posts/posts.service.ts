@@ -15,7 +15,7 @@ export class PostsService {
     });
   }
 
-  async findAll(pageSize: number = 3, page: number = 1) {
+  async findAll(pageSize?: number, page?: number) {
     return await this.dbService.post.findMany({
       take: pageSize,
       skip: (pageSize * (page - 1))
