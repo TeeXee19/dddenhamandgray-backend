@@ -6,6 +6,8 @@ export class CreatePostDto {
     @ApiProperty({ required: false})
     content?: string;
     @ApiProperty({ required: false})
+    imageUrl?: string;
+    @ApiProperty({ required: false})
     published?: boolean
     // @ApiProperty({ required: false})
     authorId: number;
