@@ -1,7 +1,8 @@
 import { Body, Controller, Get, Param, Patch, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
-import { AuthGuard } from './auth/guards/auth.guard';
 import { UpdateStateDto, UpdateSummaryDto } from './app.dto';
+import { AuthGuard } from './guards/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller()
 export class AppController {
@@ -19,6 +20,7 @@ export class AppController {
   }
 
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   @Patch('states/:id')
   updateStateById(@Param('id') id: string, @Body() updateStateDto: UpdateStateDto) {
     return this.appService.updateStateById(+id, updateStateDto);
@@ -31,6 +33,7 @@ export class AppController {
   }
  
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   @Patch('summary')
   updateSummary(@Body() updateSummaryDto: UpdateSummaryDto) {
     return this.appService.updateSummary(updateSummaryDto);

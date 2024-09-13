@@ -6,7 +6,7 @@ import {
     UnauthorizedException,
   } from '@nestjs/common';
   import { JwtService } from '@nestjs/jwt';
-  import { jwtConstants } from '../constants';
+  import { jwtConstants } from '../auth/constants';
   import { Request } from 'express';
   import { Reflector } from '@nestjs/core';
   import { DbService } from 'src/db/db.service';
@@ -32,6 +32,8 @@ import {
         // 💡 We're assigning the payload to the request object here
         // so that we can access it in our route handlers
         request['user'] = payload;
+        // console.log("TOKEN: ", token)
+        // console.log("PAYLOAD: ", payload)
       } catch {
         throw new UnauthorizedException();
       }

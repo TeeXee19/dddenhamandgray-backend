@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { LoginDto, LoginResponseData } from './dto/auth.dto';
 import { DbService } from 'src/db/db.service';
 import { JwtService } from '@nestjs/jwt';
@@ -43,6 +43,8 @@ export class AuthService {
         }
       }
     }
+
+    throw new UnauthorizedException("Invalid credentials")
 
   }
 }
